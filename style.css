@@ -1,0 +1,347 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  justify-content: center;
+  grid-gap: 35px;
+  padding: 35px;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.image-container:hover {
+  transform: scale(1.03);
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 100%;
+}
+
+.content-promo__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.image-container:hover .content-promo__overlay {
+  opacity: 1;
+}
+
+.content-promo__overlay__svg {
+  fill: #f0f8ff;
+  width: 36px;
+  height: 36px;
+}
+
+.slider-container {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.slider-container.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  max-width: 70%;
+  max-height: 80vh;
+}
+
+.controls__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+}
+
+.controls__link {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  text-align: center;
+  line-height: 28px;
+}
+
+.controls__link__svg--close {
+  stroke: #fff;
+  height: 1.8rem;
+  width: 1.8rem;
+  stroke-width: 4px;
+}
+
+.artwork__info-button {
+  background-color: green;
+  color: #fff;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+  border-radius: 20px;
+}
+
+.artwork__info-button:focus {
+  outline: none;
+}
+
+.artwork__modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.artwork__modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: none;
+  color: whitesmoke;
+  padding: 20px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  z-index: 1001;
+}
+
+.artwork__modal-info {
+  max-width: 25vw;
+  margin-bottom: -1.2rem;
+  margin-top: -1.2rem;
+  padding-bottom: 1.2rem;
+  padding-top: 1.2rem;
+}
+
+.artwork__modal-image {
+  max-width: 25vw;
+  height: auto;
+  max-height: 70vh;
+  display: block;
+  margin: 0 auto;
+}
+
+.artwork__modal-artwork {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.artwork__modal-image {
+  object-fit: contain;
+}
+
+.artwork__modal-details {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  color: white;
+}
+
+.artwork__modal-year,
+.artwork__modal-title {
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+}
+
+.artwork__modal-artist {
+  font-size: 1.2rem;
+  display: block;
+  margin-top: 1rem;
+  line-height: 1.4rem;
+}
+
+.artwork__modal-url {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  line-height: 1.4rem;
+  margin: 0.8rem 0;
+}
+
+.artwork__modal-url:hover {
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 25px;
+    padding: 25px;
+  }
+
+  .swiper-slide img {
+    max-width: 80%;
+  }
+
+  .controls__link__svg--close {
+    stroke: #fff;
+    height: 1.5rem;
+    width: 1.5rem;
+    stroke-width: 4px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-gap: 35px;
+    padding: 35px;
+  }
+
+  .swiper-slide img {
+    max-width: 70%;
+  }
+
+  .controls__link__svg--arrow--180 {
+    transform: rotate(180deg);
+  }
+
+  .swiper-button-next svg,
+  .swiper-button-prev svg {
+    stroke: #fff;
+    height: 1.8rem;
+    width: 1.8rem;
+    stroke-width: 4px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    --swiper-navigation-size: none;
+    --swiper-theme-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.spinner-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1002; /* Place the spinner above the modal content */
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.artwork__info-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+.image-slide-container {
+  position: relative;
+}
+
+.swiper-container {
+  position: relative;
+}
+
+.swiper-toggle-info-button {
+  position: absolute;
+  bottom: 20px; /* Adjust the margin as needed to position it below the swiper container */
+  left: 20px; /* Adjust the margin as needed to position it to the left */
+  z-index: 1; /* Ensure it's above the swiper content */
+}
+
+.toggle-text {
+  color: white;
+  font-size: 14px; /* Adjust the font size as needed */
+  margin-right: 5px; /* Adjust the margin as needed to separate text from the button */
+  vertical-align: middle;
+}
+
+/* Style adjustments for the SVG image */
+.swiper-toggle-info-button svg {
+  transform: scale(1.8) !important;
+  margin: 0 10px;
+  fill: white;
+  transform: rotate(90deg);
+}
