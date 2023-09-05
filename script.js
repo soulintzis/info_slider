@@ -57,19 +57,19 @@ document.addEventListener("DOMContentLoaded", function () {
       const slides = swiper.slides;
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-
+    
       slides.forEach((slide, index) => {
         const buttonsData = imageButtonData[index] || [];
         const img = slide.querySelector("img");
-
+    
         img.onload = () => {
           const containerWidth = img.width;
           const containerHeight = img.height;
-
+    
           buttonsData.forEach((buttonObj) => {
             const button = document.createElement("button");
-            button.classList.add("artwork__info-button");
-
+            button.classList.add("artwork__info-button", "artwork-button"); // Add the class "artwork-button"
+    
             button.setAttribute("data-id", buttonObj.id);
             button.setAttribute("data-title", buttonObj.title);
             button.setAttribute("data-artist", buttonObj.artist);
@@ -83,30 +83,51 @@ document.addEventListener("DOMContentLoaded", function () {
               generateUrl(buttonObj.artist, buttonObj.id)
             );
             button.addEventListener("click", handleButtonClick);
-
+    
             const icon = document.createElement("img");
             icon.setAttribute("src", "icon.svg");
             icon.classList.add("artwork__info-icon");
-
+    
             button.appendChild(icon);
-
-
+    
             const marginLeft = (viewportWidth - containerWidth) / 2;
-            const marginTop =
-              (viewportHeight - containerHeight) / 2;
-
+            const marginTop = (viewportHeight - containerHeight) / 2;
+    
             const left = (buttonObj.left / 100) * containerWidth;
             const top = (buttonObj.top / 100) * containerHeight;
-
+    
             button.style.position = "absolute";
             button.style.left = `${marginLeft + left}px`;
             button.style.top = `${marginTop + top}px`;
-
+    
             slide.appendChild(button);
           });
         };
       });
     }
+  }
+
+  const toggleButton = document.querySelector(".swiper-toggle-info-button");
+  toggleButton.addEventListener("click", toggleButtons);
+  
+  let isButtonsHidden = false;
+  
+  function toggleButtons() {
+    const artworkButtons = document.querySelectorAll(".artwork-button");
+    artworkButtons.forEach((button) => {
+      button.classList.toggle("hidden");
+    });
+  
+    // Get the span element by ID
+    const toggleText = document.getElementById("swiperToggleButtonText");
+  
+    if (isButtonsHidden) {
+      toggleText.textContent = "HIDE";
+    } else {
+      toggleText.textContent = "SHOW";
+    }
+  
+    isButtonsHidden = !isButtonsHidden;
   }
 
   function generateImageUrl(artist, id) {
